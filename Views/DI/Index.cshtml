@@ -1,0 +1,57 @@
+﻿<div class="text-center">
+    <h2 class="display-4">
+        Dependency Injection Lifetime
+    </h2>
+</div>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Service Type</th>
+            <th>First Instance Operation ID</th>
+            <th>Second Instance Operation ID</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td style="background-color: darksalmon">
+                Transient
+            </td>
+            <td style="background-color: darksalmon">
+                @ViewBag.transient1
+            </td>
+            <td style="background-color: darksalmon">
+                @ViewBag.transient2
+            </td>
+        </tr>
+        <tr>
+            <td>Scoped</td>
+            <td>@ViewBag.scoped1</td>
+            <td>@ViewBag.scoped2</td>
+        </tr>
+        <tr>
+            <td style="background-color: aquamarine">
+                Singleton
+            </td>
+            <td style="background-color: aquamarine">
+                @ViewBag.singleton1
+            </td>
+            <td style="background-color: aquamarine">
+                @ViewBag.singleton2
+            </td>
+        </tr>
+    </tbody>
+</table>
+<p>
+    Observation from Request 1 and Request 2
+
+    Transient service always returns a new instance even though it’s the same request, that is why operation Ids are different for first instance and second instance for both the requests (Request 1 and Request 2).
+
+    In the case of Scoped service, a single instance is created per request and the same instance is shared across the request. That is why operation Ids are the same for first instance as well as second instance of Request 1. But if we click on refresh button or load the UI on different tab of a browser (which is nothing but Request 2), new ids are generated.
+
+    In the case of Singleton service, only one instance is created and shared across applications. If we click on refresh button or load the UI on a different tab of a browser (which is nothing but Request 2), those ids will remain the same.
+
+    Service Type	In the scope of a given HTTP request	Across different HTTP requests
+    Transient	New Instance	New Instance
+    Scoped	Same Instance	New Instance
+    Singleton	Same Instance	Same Instance
+</p>
